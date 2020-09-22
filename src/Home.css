@@ -79,3 +79,22 @@ body {
      visibility: visible; 
      display: flex;
 }
+
+
+
+.lightroom-pic{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center; 
+    width: 100%;
+    background-size: 100%;
+    min-width: 800px;
+    min-height: 600px;
+    cursor: -webkit-zoom-in;
+}
+
+.zoom-lightroom-pic{
+    background-size: 200%;
+    cursor: -webkit-zoom-out;
+    
+}

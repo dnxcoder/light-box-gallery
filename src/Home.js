@@ -8,6 +8,8 @@ const Home = () => {
     const [visibleLightRoom, setVisibleLightRoom] = useState(false);
     const [zoomImg, setZoomImg] = useState(false);
 
+    const [zoomPicBack, setZoomPickBack] = useState(false);
+
     const [moveZoom, setMoveZoom] = useState('');
 
     const imagesData = [
@@ -46,7 +48,7 @@ const Home = () => {
     ]
 
     const setPicture = (event) => {
-        console.log(event.target.getAttribute('imgpath'))
+        
         setChosenImg(event.target.getAttribute('imgpath'));
         setVisibleLightRoom(true);
     }
@@ -65,12 +67,40 @@ const Home = () => {
     const closeLightRoom = () => {
 
         setVisibleLightRoom(false);
+        setZoomPickBack(false);
         setZoomImg(false);
     }
 
     const zoomPicture = (event) => {
         setZoomImg(!zoomImg);
         event.stopPropagation();
+    }
+
+    const zoomPicBackground = (event) => {
+        setZoomPickBack(!zoomPicBack);
+        event.stopPropagation();
+
+        const backPick = document.querySelector('.lightroom-pic');
+
+        backPick.addEventListener('mousemove', (e) => {
+
+            let width = backPick.offsetWidth;
+            let height = backPick.offsetHeight;
+
+            let mouseX = e.offsetX;
+            let mouseY = e.offsetY;
+
+            let bgPosX = (mouseX / width * 100);
+            let bgPosY = (mouseY / height * 100);
+
+            
+
+            backPick.style.backgroundPosition = `${bgPosX}% ${bgPosY}%`;
+        })
+
+        backPick.addEventListener('mouseleave', ()=> {
+            backPick.style.backgroundPosition='center';
+        })
     }
 
 
@@ -85,8 +115,16 @@ const Home = () => {
             <div className={`lightroom-container ${visibleLightRoom ? 'show-lightroom' : ''} `}
                 onClick={closeLightRoom} >
 
-                <img src={chosenImg} className={`lightroom-image ${zoomImg ? 'zoom-image' : ''}`} alt='zoom-picture'
-                    style={{ moveZoom }} onClick={zoomPicture} />
+                {/* <img src={chosenImg} className={`lightroom-image ${zoomImg ? 'zoom-image' : ''}`} alt='zoom-picture'
+                    style={{ moveZoom }} onClick={zoomPicture} /> */}
+
+                 <div className='image-wrap'>
+                    <div className={`lightroom-pic ${zoomPicBack ? 'zoom-lightroom-pic' : ''}`} style={{ backgroundImage: `url('${chosenImg}')` }}
+                        onClick={zoomPicBackground}></div>
+                </div> 
+
+
+              
 
             </div>
         </div>
