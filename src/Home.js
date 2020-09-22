@@ -6,11 +6,8 @@ const Home = () => {
 
     const [chosenImg, setChosenImg] = useState('');
     const [visibleLightRoom, setVisibleLightRoom] = useState(false);
-    const [zoomImg, setZoomImg] = useState(false);
 
     const [zoomPicBack, setZoomPickBack] = useState(false);
-
-    const [moveZoom, setMoveZoom] = useState('');
 
     const imagesData = [
         {
@@ -53,8 +50,6 @@ const Home = () => {
         setVisibleLightRoom(true);
     }
 
-
-
     const photos = imagesData.map((value, index) => {
         return (
             <div onClick={setPicture} imgPath={value.imagepath} className='photo-container'>
@@ -68,12 +63,6 @@ const Home = () => {
 
         setVisibleLightRoom(false);
         setZoomPickBack(false);
-        setZoomImg(false);
-    }
-
-    const zoomPicture = (event) => {
-        setZoomImg(!zoomImg);
-        event.stopPropagation();
     }
 
     const zoomPicBackground = (event) => {
@@ -114,9 +103,6 @@ const Home = () => {
             </div>
             <div className={`lightroom-container ${visibleLightRoom ? 'show-lightroom' : ''} `}
                 onClick={closeLightRoom} >
-
-                {/* <img src={chosenImg} className={`lightroom-image ${zoomImg ? 'zoom-image' : ''}`} alt='zoom-picture'
-                    style={{ moveZoom }} onClick={zoomPicture} /> */}
 
                  <div className='image-wrap'>
                     <div className={`lightroom-pic ${zoomPicBack ? 'zoom-lightroom-pic' : ''}`} style={{ backgroundImage: `url('${chosenImg}')` }}
